@@ -299,7 +299,7 @@
             border: 2px solid #fff;
             animation: shopPulse 1.5s infinite;
             position: relative;
-            pointer-events: none; /* غیرفعال کردن کلیک */
+            pointer-events: none;
             opacity: 0.9;
         }
 
@@ -316,7 +316,7 @@
 
         /* لینک انجمن - بدون لینک */
         .navbar a.forum-link {
-            pointer-events: none; /* غیرفعال کردن کلیک */
+            pointer-events: none;
             opacity: 0.9;
         }
 
@@ -435,22 +435,20 @@
         }
 
         .hero h2 {
-            font-size: clamp(18px, 4vw, 28px);
+            font-size: clamp(24px, 5vw, 32px);
             margin-bottom: 40px;
-            color: #fff;
-            text-shadow: 0 0 15px var(--primary), 0 0 30px var(--secondary);
-            max-width: 800px;
-            line-height: 1.8;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
-            padding: 20px 40px;
-            border-radius: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: transparent;
+            background: linear-gradient(135deg, #fff, #ccc);
+            -webkit-background-clip: text;
+            position: relative;
         }
 
-        #hero-text {
+        #typing {
             color: #fff;
             text-shadow: 0 0 10px var(--primary), 0 0 20px var(--secondary);
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
+            margin-left: 20px;
         }
 
         .glitch {
@@ -676,6 +674,10 @@
             box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
         }
 
+        .card.founder {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(255, 0, 0, 0.2));
+        }
+
         .card.owner {
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(255, 215, 0, 0.2));
         }
@@ -684,115 +686,9 @@
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 255, 0, 0.2));
         }
 
-        /* ===== GALLERY ===== */
-        .gallery-wrapper {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 20px;
-            perspective: 1000px;
-        }
-
-        .gallery-scroll {
-            width: 100%;
-            border-radius: 50px;
-            overflow: hidden;
-            cursor: pointer;
-            position: relative;
-            border: 4px solid transparent;
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.5);
-            transition: all 0.4s;
-            transform-style: preserve-3d;
-            animation: galleryFloat 8s infinite;
-        }
-
-        @keyframes galleryFloat {
-            0%, 100% { transform: rotateY(0deg) rotateX(0deg); }
-            25% { transform: rotateY(5deg) rotateX(2deg); }
-            75% { transform: rotateY(-5deg) rotateX(-2deg); }
-        }
-
-        .gallery-scroll:hover {
-            transform: scale(1.02) rotateY(2deg);
-            border-color: var(--primary);
-            box-shadow: 0 0 60px var(--primary), 0 0 100px var(--accent);
-        }
-
-        #slider-img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: opacity 0.5s ease;
-        }
-
-        .gallery-dots {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 10px var(--primary);
-            animation: dotPulse 2s infinite;
-        }
-
-        .dot:nth-child(1) { animation-delay: 0s; }
-        .dot:nth-child(2) { animation-delay: 0.5s; }
-        .dot:nth-child(3) { animation-delay: 1s; }
-        .dot:nth-child(4) { animation-delay: 1.5s; }
-
-        @keyframes dotPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); background: var(--primary); }
-        }
-
-        .dot.active {
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            box-shadow: 0 0 20px var(--primary), 0 0 40px var(--accent);
-            transform: scale(1.4);
-        }
-
-        /* ===== LIGHTBOX ===== */
-        #lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            backdrop-filter: blur(20px);
+        /* ===== GALLERY SECTION - حذف کامل ===== */
+        #gallery {
             display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            cursor: pointer;
-        }
-
-        #lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 50px;
-            border: 4px solid transparent;
-            box-shadow: 0 0 60px var(--primary), 0 0 120px var(--accent);
-            animation: lightboxZoom 0.3s ease;
-        }
-
-        @keyframes lightboxZoom {
-            from {
-                opacity: 0;
-                transform: scale(0.5) rotate(-10deg);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
         }
 
         /* ===== SERVER IP ===== */
@@ -920,11 +816,6 @@
                 width: 100%;
                 max-width: 350px;
             }
-            
-            .hero h2 {
-                padding: 15px 20px;
-                font-size: 16px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -953,6 +844,7 @@
     </style>
 </head>
 <body>
+
     <!-- ذرات سایبرپانک -->
     <script>
         for (let i = 0; i < 50; i++) {
@@ -1000,7 +892,6 @@
             <li><a href="#home" class="glitch" data-text="خانه">🏠 خانه</a></li>
             <li><a href="#features" class="glitch" data-text="ویژگی‌ها">✨ ویژگی‌ها</a></li>
             <li><a href="#team" class="glitch" data-text="تیم">👥 تیم</a></li>
-            <li><a href="#gallery" class="glitch" data-text="گالری">📸 گالری</a></li>
             <li><a href="#server-ip" class="glitch" data-text="آیپی">🌐 آیپی</a></li>
             <li><a class="shop-link">⚡ فروشگاه ویژه ⚡</a></li>
             <li><a class="glitch forum-link" data-text="انجمن">📋 انجمن</a></li>
@@ -1010,7 +901,7 @@
     <!-- ===== HERO SECTION ===== -->
     <section id="home" class="hero">
         <h1 class="glitch" data-text="VALIX RP">VALIX RP</h1>
-        <h2><span id="hero-text">به سرور Valix Role Play خوش آمدید، سروری جذاب و پر چالش با ایونت‌های جذاب و هیجان‌انگیز</span></h2>
+        <h2><span id="typing"></span></h2>
         <a href="mtasa://5.57.35.52:7777" class="btn">🎮 ورود به بازی</a>
     </section>
 
@@ -1029,26 +920,15 @@
     <section id="team" class="section">
         <h2 class="glitch" data-text="تیم مدیریت">تیم مدیریت</h2>
         <div class="cards">
-            <div class="card owner">👑 Owner: <span style="color: #ffaa00; text-shadow: 0 0 20px #ffaa00;">Mr_Taha</span></div>
-            <div class="card scripter">⚡ Scripter: <span style="color: #00ff00; text-shadow: 0 0 20px #00ff00;">Kurdx</span></div>
+            <div class="card founder">👑 Founder: <span style="color: #ff5555; text-shadow: 0 0 20px #ff0000;">Abolfazl</span></div>
+            <div class="card owner">👑 Owner: <span style="color: #ffaa00; text-shadow: 0 0 20px #ffaa00;">Hosein</span></div>
+            <div class="card scripter">⚡ Scripter: <span style="color: #00ff00; text-shadow: 0 0 20px #00ff00;">Amirreza</span></div>
         </div>
     </section>
 
-    <!-- ===== GALLERY SECTION ===== -->
-    <section id="gallery" class="section">
-        <h2 class="glitch" data-text="گالری تصاویر">گالری تصاویر</h2>
-        <div class="gallery-wrapper">
-            <div class="gallery-scroll">
-                <img id="slider-img" src="https://uploadkon.ir/uploads/418017_26IMG-20250907-151918-804.png" alt="Gallery Image">
-            </div>
-            <div class="gallery-dots" id="gallery-dots"></div>
-        </div>
-    </section>
+    <!-- ===== GALLERY SECTION (حذف شده) ===== -->
 
-    <!-- ===== LIGHTBOX ===== -->
-    <div id="lightbox">
-        <img src="" alt="Expanded Image">
-    </div>
+    <!-- ===== LIGHTBOX (حذف شده) ===== -->
 
     <!-- ===== SERVER IP SECTION ===== -->
     <section class="server-ip-section">
@@ -1062,7 +942,7 @@
     <!-- ===== FOOTER ===== -->
     <footer>
         <p>⚡ <span>VALIX ROLEPLAY</span> | تمامی حقوق محفوظ است © 2026</p>
-        <p style="font-size: 18px; margin-top: 20px;">طراحی شده توسط <span>@Mashin_Mazndarn</span></p>
+        <p style="font-size: 18px; margin-top: 20px;">
     </footer>
 
     <!-- ===== SCRIPTS ===== -->
@@ -1093,62 +973,19 @@
             });
         });
 
-        // ===== GALLERY SLIDER =====
-        const sliderImages = [
-            "https://uploadkon.ir/uploads/418017_26IMG-20250907-151918-804.png",
-            "https://uploadkon.ir/uploads/028415_26IMG-20251104-140619-038.jpg",
-            "https://uploadkon.ir/uploads/91c615_26IMG-20251104-140622-920.jpg",
-            "https://uploadkon.ir/uploads/bd6a16_26InShot-20260213-234136209.jpg"
-        ];
+        // ===== TYPING EFFECT =====
+        const text = "به سرور Valix Role Play خوش آمدید، سروری جذاب و پر چالش با ایونت های هیجان انگیز";
+        let i = 0;
+        const typingElement = document.getElementById('typing');
 
-        let sliderIndex = 0;
-        const sliderImg = document.getElementById('slider-img');
-        const dotsContainer = document.getElementById('gallery-dots');
-
-        // پاک کردن دات‌های قبلی (اگر وجود داشته باشند)
-        dotsContainer.innerHTML = '';
-
-        sliderImages.forEach((_, index) => {
-            const dot = document.createElement('span');
-            dot.className = 'dot' + (index === 0 ? ' active' : '');
-            dot.addEventListener('click', () => {
-                sliderIndex = index;
-                updateSlider();
-            });
-            dotsContainer.appendChild(dot);
-        });
-
-        function updateSlider() {
-            sliderImg.style.opacity = '0';
-            setTimeout(() => {
-                sliderImg.src = sliderImages[sliderIndex];
-                sliderImg.style.opacity = '1';
-                
-                document.querySelectorAll('.dot').forEach((dot, idx) => {
-                    dot.classList.toggle('active', idx === sliderIndex);
-                });
-            }, 500);
+        function typeWriter() {
+            if (i < text.length) {
+                typingElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
         }
-
-        setInterval(() => {
-            sliderIndex = (sliderIndex + 1) % sliderImages.length;
-            updateSlider();
-        }, 5000);
-
-        // ===== LIGHTBOX =====
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = lightbox.querySelector('img');
-
-        sliderImg.addEventListener('click', () => {
-            lightboxImg.src = sliderImg.src;
-            lightbox.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        });
-
-        lightbox.addEventListener('click', () => {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
+        typeWriter();
 
         // ===== COPY IP =====
         function copyIP() {
@@ -1171,4 +1008,3 @@
         });
     </script>
 </body>
-</html>
