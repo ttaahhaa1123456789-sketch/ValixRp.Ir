@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VALIX RP | نسل بعدی گیمینگ</title>
+    <title>VALIX RP | "به سرور Valix Role Play خوش آمدید، سروری جذاب و پر چالش با ایونت‌های جذاب و هیجان‌انگیز";</title>
     
     <!-- فونت‌های خفن -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
