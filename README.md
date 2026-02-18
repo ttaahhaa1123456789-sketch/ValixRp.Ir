@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VALIX RP | "به سرور Valix Role Play خوش آمدید، سروری جذاب و پر چالش با ایونت‌های جذاب و هیجان‌انگیز";</title>
+    <title>VALIX RP | نسل بعدی گیمینگ</title>
     
     <!-- فونت‌های خفن -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
@@ -435,20 +435,22 @@
         }
 
         .hero h2 {
-            font-size: clamp(24px, 5vw, 32px);
+            font-size: clamp(18px, 4vw, 28px);
             margin-bottom: 40px;
-            color: transparent;
-            background: linear-gradient(135deg, #fff, #ccc);
-            -webkit-background-clip: text;
-            position: relative;
+            color: #fff;
+            text-shadow: 0 0 15px var(--primary), 0 0 30px var(--secondary);
+            max-width: 800px;
+            line-height: 1.8;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            padding: 20px 40px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        #typing {
+        #hero-text {
             color: #fff;
             text-shadow: 0 0 10px var(--primary), 0 0 20px var(--secondary);
-            border-left: 4px solid var(--primary);
-            padding-left: 20px;
-            margin-left: 20px;
         }
 
         .glitch {
@@ -918,6 +920,11 @@
                 width: 100%;
                 max-width: 350px;
             }
+            
+            .hero h2 {
+                padding: 15px 20px;
+                font-size: 16px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -946,7 +953,6 @@
     </style>
 </head>
 <body>
-
     <!-- ذرات سایبرپانک -->
     <script>
         for (let i = 0; i < 50; i++) {
@@ -1004,8 +1010,8 @@
     <!-- ===== HERO SECTION ===== -->
     <section id="home" class="hero">
         <h1 class="glitch" data-text="VALIX RP">VALIX RP</h1>
-        <h2><span id="typing"></span></h2>
-        <a href="mtasa://127.0.0.1:22003" class="btn">🎮 ورود به بازی</a>
+        <h2><span id="hero-text">به سرور Valix Role Play خوش آمدید، سروری جذاب و پر چالش با ایونت‌های جذاب و هیجان‌انگیز</span></h2>
+        <a href="mtasa://5.57.35.52:7777" class="btn">🎮 ورود به بازی</a>
     </section>
 
     <!-- ===== FEATURES SECTION ===== -->
@@ -1021,8 +1027,10 @@
 
     <!-- ===== TEAM SECTION ===== -->
     <section id="team" class="section">
-        <h2 class="glitch" data-text="
-
+        <h2 class="glitch" data-text="تیم مدیریت">تیم مدیریت</h2>
+        <div class="cards">
+            <div class="card owner">👑 Owner: <span style="color: #ffaa00; text-shadow: 0 0 20px #ffaa00;">Mr_Taha</span></div>
+            <div class="card scripter">⚡ Scripter: <span style="color: #00ff00; text-shadow: 0 0 20px #00ff00;">Kurdx</span></div>
         </div>
     </section>
 
@@ -1085,20 +1093,6 @@
             });
         });
 
-        // ===== TYPING EFFECT =====
-        const text = "به نسل بعدی گیمینگ خوش آمدید";
-        let i = 0;
-        const typingElement = document.getElementById('typing');
-
-        function typeWriter() {
-            if (i < text.length) {
-                typingElement.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 80);
-            }
-        }
-        typeWriter();
-
         // ===== GALLERY SLIDER =====
         const sliderImages = [
             "https://uploadkon.ir/uploads/418017_26IMG-20250907-151918-804.png",
@@ -1110,6 +1104,9 @@
         let sliderIndex = 0;
         const sliderImg = document.getElementById('slider-img');
         const dotsContainer = document.getElementById('gallery-dots');
+
+        // پاک کردن دات‌های قبلی (اگر وجود داشته باشند)
+        dotsContainer.innerHTML = '';
 
         sliderImages.forEach((_, index) => {
             const dot = document.createElement('span');
