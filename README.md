@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VALIX RP | نسل بعدی گیمینگ</title>
+    <title>VALIX Role Play | نسل بعدی گیمینگ</title>
     
     <!-- فونت‌های خفن -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
@@ -243,6 +243,11 @@
             color: var(--accent);
             text-shadow: 0 0 20px var(--accent);
             animation: spin 3s linear infinite reverse;
+        }
+
+        @keyframes spin {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
         }
 
         .navbar ul {
@@ -686,11 +691,6 @@
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 255, 0, 0.2));
         }
 
-        /* ===== GALLERY SECTION - حذف کامل ===== */
-        #gallery {
-            display: none;
-        }
-
         /* ===== SERVER IP ===== */
         .server-ip-section {
             padding: 100px 20px;
@@ -847,23 +847,25 @@
 
     <!-- ذرات سایبرپانک -->
     <script>
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'cyber-particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 10 + 's';
-            particle.style.width = Math.random() * 6 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            document.body.appendChild(particle);
-        }
+        (function() {
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'cyber-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.width = Math.random() * 6 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                document.body.appendChild(particle);
+            }
 
-        for (let i = 0; i < 5; i++) {
-            const line = document.createElement('div');
-            line.className = 'cyber-line';
-            line.style.top = Math.random() * 100 + '%';
-            line.style.animationDelay = Math.random() * 5 + 's';
-            document.body.appendChild(line);
-        }
+            for (let i = 0; i < 5; i++) {
+                const line = document.createElement('div');
+                line.className = 'cyber-line';
+                line.style.top = Math.random() * 100 + '%';
+                line.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(line);
+            }
+        })();
     </script>
 
     <!-- ===== PRELOADER ===== -->
@@ -882,7 +884,7 @@
 
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
-        <div class="logo">VALIX RP</div>
+        <div class="logo">VALIX Role Play</div>
         <div class="menu-toggle" id="menu-toggle">
             <div></div>
             <div></div>
@@ -900,7 +902,7 @@
 
     <!-- ===== HERO SECTION ===== -->
     <section id="home" class="hero">
-        <h1 class="glitch" data-text="VALIX RP">VALIX RP</h1>
+        <h1 class="glitch" data-text="VALIX RP">VALIX Role Play</h1>
         <h2><span id="typing"></span></h2>
         <a href="mtasa://5.57.35.52:7777" class="btn">🎮 ورود به بازی</a>
     </section>
@@ -926,10 +928,6 @@
         </div>
     </section>
 
-    <!-- ===== GALLERY SECTION (حذف شده) ===== -->
-
-    <!-- ===== LIGHTBOX (حذف شده) ===== -->
-
     <!-- ===== SERVER IP SECTION ===== -->
     <section class="server-ip-section">
         <div id="server-ip" onclick="copyIP()">
@@ -942,7 +940,7 @@
     <!-- ===== FOOTER ===== -->
     <footer>
         <p>⚡ <span>VALIX ROLEPLAY</span> | تمامی حقوق محفوظ است © 2026</p>
-        <p style="font-size: 18px; margin-top: 20px;">
+        <p style="font-size: 18px; margin-top: 20px;">طراحی شده با ❤️ برای گیمرهای حرفه‌ای</p>
     </footer>
 
     <!-- ===== SCRIPTS ===== -->
@@ -961,50 +959,79 @@
         const menuToggle = document.getElementById('menu-toggle');
         const navLinks = document.getElementById('nav-links');
 
-        menuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navLinks.classList.toggle('show');
-        });
-
-        document.querySelectorAll('.navbar a').forEach(link => {
-            link.addEventListener('click', function() {
-                menuToggle.classList.remove('active');
-                navLinks.classList.remove('show');
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+                navLinks.classList.toggle('show');
             });
-        });
+
+            // بستن منو با کلیک روی لینک‌ها
+            document.querySelectorAll('.navbar a').forEach(link => {
+                link.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('show');
+                });
+            });
+
+            // بستن منو با کلیک بیرون
+            document.addEventListener('click', function(e) {
+                if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('show');
+                }
+            });
+        }
 
         // ===== TYPING EFFECT =====
         const text = "به سرور Valix Role Play خوش آمدید، سروری جذاب و پر چالش با ایونت های هیجان انگیز";
         let i = 0;
         const typingElement = document.getElementById('typing');
 
-        function typeWriter() {
-            if (i < text.length) {
-                typingElement.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
+        if (typingElement) {
+            function typeWriter() {
+                if (i < text.length) {
+                    typingElement.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
             }
+            typeWriter();
         }
-        typeWriter();
 
         // ===== COPY IP =====
         function copyIP() {
-            const ip = document.getElementById('ip-text').innerText;
+            const ipElement = document.getElementById('ip-text');
+            if (!ipElement) return;
+            
+            const ip = ipElement.innerText;
             navigator.clipboard.writeText(ip).then(() => {
                 const msg = document.getElementById('copy-msg');
-                msg.style.opacity = '1';
-                setTimeout(() => {
-                    msg.style.opacity = '0';
-                }, 2000);
+                if (msg) {
+                    msg.style.opacity = '1';
+                    setTimeout(() => {
+                        msg.style.opacity = '0';
+                    }, 2000);
+                }
+            }).catch(err => {
+                console.error('خطا در کپی کردن:', err);
+                alert('خطا در کپی آیپی! لطفاً دستی کپی کنید.');
             });
         }
 
-        // ===== CLOSE MENU ON OUTSIDE CLICK =====
-        document.addEventListener('click', (e) => {
-            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                menuToggle.classList.remove('active');
-                navLinks.classList.remove('show');
-            }
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>
+</html>
