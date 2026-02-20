@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VALIX Role Play | نسل بعدی گیمینگ</title>
+    <title>Valix Role Play | نسل بعدی گیمینگ</title>
     
     <!-- فونت‌های خفن -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
@@ -390,7 +390,7 @@
             }
         }
 
-        /* ===== HERO SECTION ===== */
+        /* ===== HERO SECTION با ستاره‌های متحرک ===== */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -402,6 +402,28 @@
             position: relative;
             z-index: 2;
             perspective: 1000px;
+        }
+
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            direction: ltr;
+        }
+
+        .star {
+            font-size: 60px;
+            color: #444;
+            text-shadow: 0 0 10px #444;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .star.active {
+            color: #ffd700;
+            text-shadow: 0 0 30px #ffd700, 0 0 60px #ffaa00;
+            transform: scale(1.2);
         }
 
         .hero h1 {
@@ -426,12 +448,6 @@
             letter-spacing: 8px;
             animation: titleRotate 5s infinite;
             transform-style: preserve-3d;
-        }
-
-        @keyframes titleRotate {
-            0%, 100% { transform: rotateX(0deg) rotateY(0deg); }
-            25% { transform: rotateX(5deg) rotateY(-5deg); }
-            75% { transform: rotateX(-5deg) rotateY(5deg); }
         }
 
         .hero h2 {
@@ -882,7 +898,7 @@
 
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
-        <div class="logo">VALIX Role Play</div>
+        <div class="logo">Valix Role Play</div>
         <div class="menu-toggle" id="menu-toggle">
             <div></div>
             <div></div>
@@ -898,11 +914,20 @@
         </ul>
     </nav>
 
-    <!-- ===== HERO SECTION ===== -->
+    <!-- ===== HERO SECTION با ۵ ستاره ===== -->
     <section id="home" class="hero">
-        <h1 class="glitch" data-text="VALIX Role Play">VALIX Role Play</h1>
+        <!-- ۵ ستاره که دونه‌دونه روشن می‌شن -->
+        <div class="stars-container" id="starsContainer">
+            <span class="star" id="star1">★</span>
+            <span class="star" id="star2">★</span>
+            <span class="star" id="star3">★</span>
+            <span class="star" id="star4">★</span>
+            <span class="star" id="star5">★</span>
+        </div>
+        
+        <h1 class="glitch" data-text="والیکس رول پلی">والیکس رول پلی</h1>
         <h2><span id="typing"></span></h2>
-        <a href="mtasa://5.57.35.52:7777" class="btn">🎮 ورود به بازی</a>
+        <a href="mtasa:5.57.39.165:6666" class="btn">🎮 ورود به بازی</a>
     </section>
 
     <!-- ===== FEATURES SECTION ===== -->
@@ -926,22 +951,18 @@
         </div>
     </section>
 
-    <!-- ===== GALLERY SECTION (حذف شده) ===== -->
-
-    <!-- ===== LIGHTBOX (حذف شده) ===== -->
-
     <!-- ===== SERVER IP SECTION ===== -->
     <section class="server-ip-section">
         <div id="server-ip" onclick="copyIP()">
             <h2>🌐 آیپی سرور</h2>
-            <span id="ip-text">5.57.35.52:7777</span>
+            <span id="ip-text">5.57.39.165:6666</span>
             <div id="copy-msg">✅ کپی شد</div>
         </div>
     </section>
 
     <!-- ===== FOOTER ===== -->
     <footer>
-        <p>⚡ <span>VALIX ROLEPLAY</span> | تمامی حقوق محفوظ است © 2026</p>
+        <p>⚡ <span>Valix ROLEPLAY</span> | تمامی حقوق محفوظ است © 2026</p>
         <p style="font-size: 18px; margin-top: 20px;">
     </footer>
 
@@ -999,6 +1020,38 @@
             });
         }
 
+        // ===== ۵ ستاره که هر ۳ ثانیه یکی روشن می‌شه =====
+        const stars = [
+            document.getElementById('star1'),
+            document.getElementById('star2'),
+            document.getElementById('star3'),
+            document.getElementById('star4'),
+            document.getElementById('star5')
+        ];
+        
+        let currentStar = 0;
+        
+        function lightNextStar() {
+            // پاک کردن همه ستاره‌ها
+            stars.forEach(star => {
+                star.classList.remove('active');
+            });
+            
+            // روشن کردن ستاره فعلی
+            stars[currentStar].classList.add('active');
+            
+            // رفتن به ستاره بعدی
+            currentStar = (currentStar + 1) % stars.length;
+        }
+        
+        // اجرا هر ۳ ثانیه
+        setInterval(lightNextStar, 3000);
+        
+        // روشن کردن اولین ستاره بلافاصله
+        setTimeout(() => {
+            lightNextStar();
+        }, 100);
+
         // ===== CLOSE MENU ON OUTSIDE CLICK =====
         document.addEventListener('click', (e) => {
             if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
@@ -1008,3 +1061,4 @@
         });
     </script>
 </body>
+</html>
