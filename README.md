@@ -19,20 +19,23 @@
         }
 
         :root {
-            --primary: #ff0000;
-            --primary-dark: #990000;
-            --primary-glow: #ff3300;
-            --secondary: #0066ff;
-            --secondary-glow: #0099ff;
-            --accent: #aa00ff;
-            --accent-glow: #cc33ff;
-            --dark: #030014;
-            --darker: #000000;
-            --neon-red: 255, 0, 0;
-            --neon-blue: 0, 102, 255;
-            --neon-purple: 170, 0, 255;
+            /* آبی ثابت */
+            --primary: #0066ff;
+            --primary-dark: #0044cc;
+            --primary-light: #3385ff;
+            --secondary: #003399;
+            --accent: #0000ff;
             
-            /* انیمیشن‌های سه‌بعدی */
+            /* رنگ‌های جدید */
+            --gold: #ffd700;
+            --orange: #ff6600;
+            --red: #ff0000;
+            --teal: #00cc99; /* رنگ سبز-آبی برای ویژگی‌ها */
+            
+            /* پس زمینه خاکستری تیره */
+            --bg-color: #111111;
+            
+            /* انیمیشن‌های ساده */
             --perspective: 1000px;
             --rotation: 5deg;
         }
@@ -41,14 +44,14 @@
         body {
             font-family: 'Exo 2', 'Rajdhani', 'Orbitron', sans-serif;
             color: #fff;
-            background: var(--darker);
+            background: var(--bg-color);
             overflow-x: hidden;
             line-height: 1.6;
             min-height: 100vh;
             position: relative;
         }
 
-        /* پس زمینه سایبرپانک */
+        /* پس زمینه خاکستری تیره */
         body::before {
             content: '';
             position: fixed;
@@ -56,67 +59,49 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                linear-gradient(125deg, #000000 0%, #0a0015 40%, #15000a 80%, #000000 100%),
-                repeating-linear-gradient(45deg, 
-                    rgba(255, 0, 0, 0.02) 0px, 
-                    rgba(255, 0, 0, 0.02) 2px,
-                    rgba(0, 102, 255, 0.02) 2px, 
-                    rgba(0, 102, 255, 0.02) 4px,
-                    rgba(170, 0, 255, 0.02) 4px,
-                    rgba(170, 0, 255, 0.02) 6px,
-                    transparent 6px,
-                    transparent 12px
-                );
+            background: var(--bg-color);
             pointer-events: none;
             z-index: 0;
-            animation: matrix 20s linear infinite;
         }
 
-        @keyframes matrix {
-            0% { background-position: 0 0, 0 0; }
-            100% { background-position: 100% 100%, 100% 100%; }
-        }
-
-        /* ذرات سه‌بعدی */
+        /* ذرات ساده - بدون سایه */
         .cyber-particle {
             position: fixed;
-            width: 4px;
-            height: 4px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
             border-radius: 50%;
-            filter: blur(1px);
             pointer-events: none;
             z-index: 1;
-            animation: float3D 15s linear infinite;
-            transform-style: preserve-3d;
+            animation: float 20s linear infinite;
         }
 
-        @keyframes float3D {
+        @keyframes float {
             0% {
-                transform: translateZ(-500px) translateY(100vh) translateX(0) rotateX(0deg) rotateY(0deg);
+                transform: translateY(100vh) translateX(0);
                 opacity: 0;
             }
             10% {
-                opacity: 0.8;
+                opacity: 0.5;
             }
             90% {
-                opacity: 0.8;
+                opacity: 0.5;
             }
             100% {
-                transform: translateZ(500px) translateY(-100vh) translateX(100px) rotateX(360deg) rotateY(360deg);
+                transform: translateY(-100vh) translateX(100px);
                 opacity: 0;
             }
         }
 
-        /* خطوط سایبرپانک */
+        /* خطوط ساده - بدون سایه */
         .cyber-line {
             position: fixed;
-            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), var(--accent), transparent);
-            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            height: 1px;
             width: 100%;
             z-index: 1;
-            animation: scan 8s linear infinite;
+            animation: scan 10s linear infinite;
+            opacity: 0.3;
         }
 
         @keyframes scan {
@@ -129,7 +114,7 @@
             position: fixed;
             width: 100%;
             height: 100%;
-            background: #000;
+            background: var(--bg-color);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -139,42 +124,22 @@
 
         .cyber-loader {
             position: relative;
-            width: 120px;
-            height: 120px;
-            perspective: 1000px;
+            width: 80px;
+            height: 80px;
         }
 
-        .cube {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            transform-style: preserve-3d;
-            animation: cubeRotate 5s infinite linear;
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 5px solid #333;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: loaderRotate 1s linear infinite;
         }
 
-        .cube div {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 3px solid;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 900;
-            font-size: 24px;
-            text-shadow: 0 0 20px currentColor;
-        }
-
-        .cube .front { transform: translateZ(60px); border-color: var(--primary); color: var(--primary); }
-        .cube .back { transform: rotateY(180deg) translateZ(60px); border-color: var(--secondary); color: var(--secondary); }
-        .cube .right { transform: rotateY(90deg) translateZ(60px); border-color: var(--accent); color: var(--accent); }
-        .cube .left { transform: rotateY(-90deg) translateZ(60px); border-color: var(--primary-glow); color: var(--primary-glow); }
-        .cube .top { transform: rotateX(90deg) translateZ(60px); border-color: var(--secondary-glow); color: var(--secondary-glow); }
-        .cube .bottom { transform: rotateX(-90deg) translateZ(60px); border-color: var(--accent-glow); color: var(--accent-glow); }
-
-        @keyframes cubeRotate {
-            from { transform: rotateX(0deg) rotateY(0deg); }
-            to { transform: rotateX(360deg) rotateY(360deg); }
+        @keyframes loaderRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* ===== NAVBAR ===== */
@@ -189,60 +154,20 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 35px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
+            background: rgba(17, 17, 17, 0.9);
+            backdrop-filter: blur(10px);
             z-index: 1000;
-            border: 2px solid transparent;
+            border: 2px solid var(--primary);
             border-radius: 60px;
-            background-clip: padding-box;
-            animation: borderGlow 3s infinite;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
-        }
-
-        @keyframes borderGlow {
-            0%, 100% { border-color: var(--primary); box-shadow: 0 0 30px rgba(255, 0, 0, 0.3); }
-            33% { border-color: var(--secondary); box-shadow: 0 0 30px rgba(0, 102, 255, 0.3); }
-            66% { border-color: var(--accent); box-shadow: 0 0 30px rgba(170, 0, 255, 0.3); }
         }
 
         .logo {
             font-size: 32px;
             font-weight: 900;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            color: var(--red); /* تغییر به قرمز */
             font-family: 'Orbitron', sans-serif;
             letter-spacing: 4px;
             position: relative;
-            animation: logoPulse 2s infinite;
-        }
-
-        @keyframes logoPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .logo::before {
-            content: '⚡';
-            position: absolute;
-            left: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary);
-            text-shadow: 0 0 20px var(--primary);
-            animation: spin 3s linear infinite;
-        }
-
-        .logo::after {
-            content: '⚡';
-            position: absolute;
-            right: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent);
-            text-shadow: 0 0 20px var(--accent);
-            animation: spin 3s linear infinite reverse;
         }
 
         .navbar ul {
@@ -258,66 +183,38 @@
             padding: 10px 22px;
             border-radius: 40px;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
             font-size: 15px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border: 1px solid transparent;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            cursor: pointer;
-        }
-
-        .navbar a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .navbar a:hover::before {
-            left: 100%;
+            background: rgba(0, 102, 255, 0.2);
+            border: 2px solid transparent;
         }
 
         .navbar a:hover {
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 0 20px var(--primary), 0 0 40px var(--accent);
-            border-color: #fff;
+            background: var(--red);
+            border-color: var(--red);
+            transform: scale(1.05);
         }
 
-        /* لینک شاپ ویژه - بدون لینک */
+        /* لینک شاپ ویژه */
         .navbar a.shop-link {
-            background: linear-gradient(45deg, #ff0000, #ff0066, #ff00cc);
+            background: var(--primary);
             color: #fff;
             font-weight: 900;
             border: 2px solid #fff;
-            animation: shopPulse 1.5s infinite;
-            position: relative;
-            pointer-events: none;
-            opacity: 0.9;
         }
 
-        @keyframes shopPulse {
-            0%, 100% { 
-                box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0066, 0 0 60px #ff00cc;
-                transform: scale(1);
-            }
-            50% { 
-                box-shadow: 0 0 30px #ff00cc, 0 0 60px #ff0000, 0 0 90px #ff0066;
-                transform: scale(1.05);
-            }
+        .navbar a.shop-link:hover {
+            background: var(--red);
         }
 
-        /* لینک انجمن - بدون لینک */
+        /* لینک انجمن */
         .navbar a.forum-link {
-            pointer-events: none;
-            opacity: 0.9;
+            background: rgba(0, 102, 255, 0.2);
+        }
+
+        .navbar a.forum-link:hover {
+            background: var(--red);
         }
 
         /* ===== HAMBURGER MENU ===== */
@@ -332,33 +229,28 @@
         .menu-toggle div {
             width: 35px;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: var(--primary);
             border-radius: 4px;
             transition: all 0.3s;
-            box-shadow: 0 0 10px var(--primary);
         }
 
         .menu-toggle.active div:nth-child(1) {
             transform: rotate(45deg) translate(10px, 10px);
-            background: var(--secondary);
         }
 
         .menu-toggle.active div:nth-child(2) {
             opacity: 0;
-            transform: translateX(-20px);
         }
 
         .menu-toggle.active div:nth-child(3) {
             transform: rotate(-45deg) translate(8px, -8px);
-            background: var(--accent);
         }
 
         @media (max-width: 1000px) {
             .navbar ul {
                 display: none;
                 flex-direction: column;
-                background: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(20px);
+                background: rgba(17, 17, 17, 0.95);
                 position: absolute;
                 top: 80px;
                 left: 20px;
@@ -366,23 +258,10 @@
                 padding: 25px;
                 border-radius: 40px;
                 border: 2px solid var(--primary);
-                box-shadow: 0 0 40px rgba(255, 0, 0, 0.5);
             }
 
             .navbar ul.show {
                 display: flex;
-                animation: slideDown 0.3s ease;
-            }
-
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-30px) scale(0.9);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0) scale(1);
-                }
             }
 
             .menu-toggle {
@@ -390,7 +269,7 @@
             }
         }
 
-        /* ===== HERO SECTION با ستاره‌های متحرک ===== */
+        /* ===== HERO SECTION ===== */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -401,7 +280,6 @@
             padding: 20px;
             position: relative;
             z-index: 2;
-            perspective: 1000px;
         }
 
         .stars-container {
@@ -415,14 +293,11 @@
         .star {
             font-size: 60px;
             color: #444;
-            text-shadow: 0 0 10px #444;
             transition: all 0.3s;
-            cursor: default;
         }
 
         .star.active {
-            color: #ffd700;
-            text-shadow: 0 0 30px #ffd700, 0 0 60px #ffaa00;
+            color: var(--gold);
             transform: scale(1.2);
         }
 
@@ -431,115 +306,42 @@
             font-weight: 900;
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
-            background: linear-gradient(45deg, 
-                var(--primary), 
-                var(--secondary), 
-                var(--accent), 
-                var(--primary-glow), 
-                var(--secondary-glow)
-            );
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 
-                0 0 30px rgba(255, 0, 0, 0.7),
-                0 0 60px rgba(0, 102, 255, 0.5),
-                0 0 90px rgba(170, 0, 255, 0.3);
+            color: var(--red); /* تغییر به قرمز */
             margin-bottom: 20px;
             letter-spacing: 8px;
-            animation: titleRotate 5s infinite;
-            transform-style: preserve-3d;
         }
 
         .hero h2 {
             font-size: clamp(24px, 5vw, 32px);
             margin-bottom: 40px;
-            color: transparent;
-            background: linear-gradient(135deg, #fff, #ccc);
-            -webkit-background-clip: text;
-            position: relative;
+            color: #fff;
         }
 
         #typing {
-            color: #fff;
-            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--secondary);
+            color: var(--primary);
             border-left: 4px solid var(--primary);
             padding-left: 20px;
             margin-left: 20px;
         }
 
-        .glitch {
-            position: relative;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 #ff0000;
-            animation: glitch-1 2s infinite linear alternate-reverse;
-        }
-
-        .glitch::after {
-            left: -2px;
-            text-shadow: 2px 0 #0000ff;
-            animation: glitch-2 2s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-1 {
-            0% { clip-path: inset(20% 0 30% 0); }
-            20% { clip-path: inset(60% 0 10% 0); }
-            40% { clip-path: inset(10% 0 80% 0); }
-            60% { clip-path: inset(40% 0 50% 0); }
-            80% { clip-path: inset(90% 0 5% 0); }
-            100% { clip-path: inset(15% 0 70% 0); }
-        }
-
-        @keyframes glitch-2 {
-            0% { clip-path: inset(30% 0 20% 0); }
-            20% { clip-path: inset(80% 0 10% 0); }
-            40% { clip-path: inset(5% 0 60% 0); }
-            60% { clip-path: inset(20% 0 40% 0); }
-            80% { clip-path: inset(50% 0 30% 0); }
-            100% { clip-path: inset(70% 0 15% 0); }
-        }
-
         .hero .btn {
             display: inline-block;
             padding: 20px 60px;
-            background: linear-gradient(45deg, #ff0000, #ff6600, #ff00ff);
+            background: var(--primary);
             color: #fff;
             text-decoration: none;
             border-radius: 60px;
             font-weight: 900;
             font-size: 22px;
-            border: 3px solid #fff;
-            box-shadow: 0 0 30px #ff0000, 0 0 60px #ff00ff;
+            border: 2px solid #fff;
             transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
             text-transform: uppercase;
             letter-spacing: 3px;
-            transform-style: preserve-3d;
-            animation: btnFloat 3s infinite;
-        }
-
-        @keyframes btnFloat {
-            0%, 100% { transform: translateZ(0) scale(1); }
-            50% { transform: translateZ(20px) scale(1.05); }
         }
 
         .hero .btn:hover {
-            transform: translateZ(40px) scale(1.1);
-            box-shadow: 0 0 40px #ff0000, 0 0 80px #ff00ff, 0 0 120px #0000ff;
+            transform: scale(1.1);
+            background: var(--primary-light);
         }
 
         /* ===== SECTIONS ===== */
@@ -548,73 +350,15 @@
             text-align: center;
             position: relative;
             z-index: 2;
-            perspective: 1000px;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(45deg, 
-                rgba(255, 0, 0, 0.02) 0px,
-                rgba(255, 0, 0, 0.02) 20px,
-                rgba(0, 102, 255, 0.02) 20px,
-                rgba(0, 102, 255, 0.02) 40px,
-                rgba(170, 0, 255, 0.02) 40px,
-                rgba(170, 0, 255, 0.02) 60px
-            );
-            pointer-events: none;
         }
 
         .section h2 {
             font-size: 56px;
             font-weight: 900;
             margin-bottom: 70px;
-            position: relative;
-            display: inline-block;
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #fff, #ff0000, #0066ff, #aa00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
-            animation: sectionTitle 4s infinite;
-            transform-style: preserve-3d;
-        }
-
-        @keyframes sectionTitle {
-            0%, 100% { transform: rotateY(0deg) scale(1); }
-            50% { transform: rotateY(10deg) scale(1.1); }
-        }
-
-        .section h2::before,
-        .section h2::after {
-            content: '⚡';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 40px;
-            animation: spark 1.5s infinite;
-        }
-
-        .section h2::before {
-            left: -70px;
             color: var(--primary);
-            text-shadow: 0 0 20px var(--primary);
-        }
-
-        .section h2::after {
-            right: -70px;
-            color: var(--accent);
-            text-shadow: 0 0 20px var(--accent);
-        }
-
-        @keyframes spark {
-            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
-            50% { opacity: 0.5; transform: translateY(-50%) scale(1.5); }
         }
 
         /* ===== CARDS ===== */
@@ -625,7 +369,6 @@
             gap: 40px;
             max-width: 1400px;
             margin: 0 auto;
-            perspective: 1000px;
         }
 
         .card {
@@ -634,136 +377,95 @@
             width: 280px;
             font-weight: 700;
             font-size: 18px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border: 2px solid transparent;
-            transition: all 0.4s;
+            background: rgba(0, 102, 255, 0.1);
+            border: 2px solid var(--primary);
+            transition: all 0.3s;
             cursor: default;
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            animation: cardFloat 6s infinite;
-        }
-
-        .card:nth-child(1) { animation-delay: 0s; }
-        .card:nth-child(2) { animation-delay: 1s; }
-        .card:nth-child(3) { animation-delay: 2s; }
-        .card:nth-child(4) { animation-delay: 3s; }
-
-        @keyframes cardFloat {
-            0%, 100% { transform: translateY(0) rotateX(0deg); }
-            50% { transform: translateY(-20px) rotateX(5deg); }
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, 
-                var(--primary), 
-                var(--secondary), 
-                var(--accent), 
-                var(--primary-glow), 
-                var(--secondary-glow)
-            );
-            border-radius: 50px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s;
-            animation: borderRotate 3s linear infinite;
-        }
-
-        @keyframes borderRotate {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
-
-        .card:hover::before {
-            opacity: 1;
         }
 
         .card:hover {
-            transform: translateY(-30px) scale(1.05) rotateX(10deg);
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+            transform: translateY(-10px);
+            background: rgba(0, 102, 255, 0.2);
+            border-color: var(--red);
         }
 
         .card.founder {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(255, 0, 0, 0.2));
+            border-color: var(--primary);
         }
 
         .card.owner {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(255, 215, 0, 0.2));
+            border-color: #ffaa00;
         }
 
         .card.scripter {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 255, 0, 0.2));
+            border-color: #00ff00;
         }
 
-        /* ===== GALLERY SECTION - حذف کامل ===== */
-        #gallery {
-            display: none;
+        .card span {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        /* تنظیم رنگ کارت‌های ویژگی‌ها به سبز-آبی */
+        #features .card {
+            border-color: var(--teal);
+            background: rgba(0, 204, 153, 0.1);
+        }
+
+        #features .card:hover {
+            background: rgba(0, 204, 153, 0.2);
+            border-color: var(--teal);
         }
 
         /* ===== SERVER IP ===== */
         .server-ip-section {
-            padding: 100px 20px;
-            perspective: 1000px;
+            padding: 80px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ip-container {
+            position: relative;
+            display: inline-block;
         }
 
         #server-ip {
             cursor: pointer;
             padding: 50px 100px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
-            border: 4px solid transparent;
+            background: rgba(255, 102, 0, 0.1);
+            border: 4px solid var(--orange);
             border-radius: 100px;
             display: inline-block;
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
-            position: relative;
-            transition: all 0.4s;
-            transform-style: preserve-3d;
-            animation: ipFloat 5s infinite;
-        }
-
-        @keyframes ipFloat {
-            0%, 100% { transform: translateZ(0) rotateY(0deg); }
-            50% { transform: translateZ(30px) rotateY(5deg); }
+            transition: all 0.3s;
+            text-align: center;
         }
 
         #server-ip:hover {
-            transform: translateZ(50px) scale(1.05);
-            border-color: var(--primary);
-            box-shadow: 0 0 70px var(--primary), 0 0 140px var(--accent);
+            transform: scale(1.05);
+            background: rgba(255, 102, 0, 0.2);
         }
 
         #server-ip h2 {
             color: #fff;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-size: 36px;
-            text-shadow: 0 0 20px var(--primary), 0 0 40px var(--secondary);
-            letter-spacing: 3px;
         }
 
         #ip-text {
             font-size: 56px;
             font-weight: 900;
-            background: linear-gradient(45deg, #ff0000, #0066ff, #aa00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            color: var(--orange);
             letter-spacing: 6px;
             font-family: 'Orbitron', monospace;
         }
 
         #copy-msg {
             position: absolute;
-            bottom: -50px;
+            bottom: -30px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(45deg, var(--primary), var(--accent));
+            background: var(--orange);
             color: #fff;
             padding: 10px 40px;
             border-radius: 50px;
@@ -773,39 +475,25 @@
             white-space: nowrap;
             border: 2px solid #fff;
             font-size: 18px;
+            pointer-events: none;
+            z-index: 10;
         }
 
         /* ===== FOOTER ===== */
         footer {
-            background: linear-gradient(135deg, #000, #0a000a, #000a0a);
+            background: var(--bg-color);
             padding: 50px;
             text-align: center;
             font-weight: 700;
             color: #fff;
-            border-top: 3px solid transparent;
-            position: relative;
-            z-index: 2;
-            animation: footerGlow 4s infinite;
+            border-top: 3px solid var(--primary);
             font-size: 20px;
-        }
-
-        @keyframes footerGlow {
-            0%, 100% { border-color: var(--primary); box-shadow: 0 -5px 30px rgba(255, 0, 0, 0.5); }
-            33% { border-color: var(--secondary); box-shadow: 0 -5px 30px rgba(0, 102, 255, 0.5); }
-            66% { border-color: var(--accent); box-shadow: 0 -5px 30px rgba(170, 0, 255, 0.5); }
-        }
-
-        footer p {
-            font-size: 20px;
-            text-shadow: 0 0 15px currentColor;
+            margin-top: 50px;
         }
 
         footer span {
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #00ff00; /* تغییر به سبز */
             font-weight: 900;
-            font-size: 22px;
         }
 
         /* ===== RESPONSIVE ===== */
@@ -814,18 +502,12 @@
                 font-size: 40px;
             }
 
-            .section h2::before,
-            .section h2::after {
-                display: none;
-            }
-
             #server-ip {
                 padding: 30px 50px;
             }
 
             #ip-text {
                 font-size: 32px;
-                letter-spacing: 3px;
             }
 
             .card {
@@ -843,13 +525,13 @@
                 font-size: 24px;
             }
 
-            .logo::before,
-            .logo::after {
-                display: none;
+            #server-ip {
+                padding: 20px 30px;
             }
 
             #ip-text {
                 font-size: 24px;
+                letter-spacing: 3px;
             }
 
             .btn {
@@ -861,23 +543,20 @@
 </head>
 <body>
 
-    <!-- ذرات سایبرپانک -->
+    <!-- ذرات ساده -->
     <script>
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 30; i++) {
             const particle = document.createElement('div');
             particle.className = 'cyber-particle';
             particle.style.left = Math.random() * 100 + '%';
             particle.style.animationDelay = Math.random() * 10 + 's';
-            particle.style.width = Math.random() * 6 + 2 + 'px';
-            particle.style.height = particle.style.width;
             document.body.appendChild(particle);
         }
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 3; i++) {
             const line = document.createElement('div');
             line.className = 'cyber-line';
             line.style.top = Math.random() * 100 + '%';
-            line.style.animationDelay = Math.random() * 5 + 's';
             document.body.appendChild(line);
         }
     </script>
@@ -885,14 +564,7 @@
     <!-- ===== PRELOADER ===== -->
     <div id="preloader">
         <div class="cyber-loader">
-            <div class="cube">
-                <div class="front">V</div>
-                <div class="back">A</div>
-                <div class="right">L</div>
-                <div class="left">I</div>
-                <div class="top">X</div>
-                <div class="bottom">⚡</div>
-            </div>
+            <div class="loader"></div>
         </div>
     </div>
 
@@ -905,18 +577,17 @@
             <div></div>
         </div>
         <ul id="nav-links">
-            <li><a href="#home" class="glitch" data-text="خانه">🏠 خانه</a></li>
-            <li><a href="#features" class="glitch" data-text="ویژگی‌ها">✨ ویژگی‌ها</a></li>
-            <li><a href="#team" class="glitch" data-text="تیم">👥 تیم</a></li>
-            <li><a href="#server-ip" class="glitch" data-text="آیپی">🌐 آیپی</a></li>
+            <li><a href="#home">🏠 خانه</a></li>
+            <li><a href="#features">✨ ویژگی‌ها</a></li>
+            <li><a href="#team">👥 تیم</a></li>
+            <li><a href="#server-ip">🌐 آیپی</a></li>
             <li><a class="shop-link">⚡ فروشگاه ویژه ⚡</a></li>
-            <li><a class="glitch forum-link" data-text="انجمن">📋 انجمن</a></li>
+            <li><a class="forum-link">📋 انجمن</a></li>
         </ul>
     </nav>
 
-    <!-- ===== HERO SECTION با ۵ ستاره ===== -->
+    <!-- ===== HERO SECTION با ۵ ستاره طلایی ===== -->
     <section id="home" class="hero">
-        <!-- ۵ ستاره که دونه‌دونه روشن می‌شن -->
         <div class="stars-container" id="starsContainer">
             <span class="star" id="star1">★</span>
             <span class="star" id="star2">★</span>
@@ -925,14 +596,14 @@
             <span class="star" id="star5">★</span>
         </div>
         
-        <h1 class="glitch" data-text="والیکس رول پلی">والیکس رول پلی</h1>
+        <h1>والیکس رول پلی</h1>
         <h2><span id="typing"></span></h2>
         <a href="mtasa:5.57.39.165:6666" class="btn">🎮 ورود به بازی</a>
     </section>
 
     <!-- ===== FEATURES SECTION ===== -->
     <section id="features" class="section">
-        <h2 class="glitch" data-text="ویژگی‌های سرور">ویژگی‌های سرور</h2>
+        <h2>ویژگی‌های سرور</h2>
         <div class="cards">
             <div class="card">🚓 سیستم پلیس پیشرفته</div>
             <div class="card">🏢 گتو و مافیای قدرتمند</div>
@@ -943,27 +614,28 @@
 
     <!-- ===== TEAM SECTION ===== -->
     <section id="team" class="section">
-        <h2 class="glitch" data-text="تیم مدیریت">تیم مدیریت</h2>
+        <h2>تیم مدیریت</h2>
         <div class="cards">
-            <div class="card founder">👑 Founder: <span style="color: #ff5555; text-shadow: 0 0 20px #ff0000;">Abolfazl</span></div>
-            <div class="card owner">👑 Owner: <span style="color: #ffaa00; text-shadow: 0 0 20px #ffaa00;">Hosein</span></div>
-            <div class="card scripter">⚡ Scripter: <span style="color: #00ff00; text-shadow: 0 0 20px #00ff00;">Amirreza</span></div>
+            <div class="card founder">👑 Founder: <span style="color: #ff5555;">Abolfazl</span></div>
+            <div class="card owner">👑 Owner: <span style="color: #ffaa00;">Hosein</span></div>
+            <div class="card scripter">⚡ Scripter: <span style="color: #00ff00;">Amirreza</span></div>
         </div>
     </section>
 
-    <!-- ===== SERVER IP SECTION ===== -->
+    <!-- ===== SERVER IP SECTION با رنگ نارنجی ===== -->
     <section class="server-ip-section">
-        <div id="server-ip" onclick="copyIP()">
-            <h2>🌐 آیپی سرور</h2>
-            <span id="ip-text">5.57.39.165:6666</span>
-            <div id="copy-msg">✅ کپی شد</div>
+        <div class="ip-container">
+            <div id="server-ip" onclick="copyIP()">
+                <h2>🌐 آیپی سرور</h2>
+                <span id="ip-text">5.57.39.165:6666</span>
+            </div>
+            <div id="copy-msg">✅ آیپی کپی شد</div>
         </div>
     </section>
 
     <!-- ===== FOOTER ===== -->
     <footer>
         <p>⚡ <span>Valix ROLEPLAY</span> | تمامی حقوق محفوظ است © 2026</p>
-        <p style="font-size: 18px; margin-top: 20px;">
     </footer>
 
     <!-- ===== SCRIPTS ===== -->
@@ -1017,10 +689,12 @@
                 setTimeout(() => {
                     msg.style.opacity = '0';
                 }, 2000);
+            }).catch(() => {
+                alert('خطا در کپی آیپی');
             });
         }
 
-        // ===== ۵ ستاره که هر ۳ ثانیه یکی روشن می‌شه =====
+        // ===== ۵ ستاره طلایی که هر ۳ ثانیه یکی روشن می‌شه =====
         const stars = [
             document.getElementById('star1'),
             document.getElementById('star2'),
@@ -1032,27 +706,26 @@
         let currentStar = 0;
         
         function lightNextStar() {
-            // پاک کردن همه ستاره‌ها
-            stars.forEach(star => {
-                star.classList.remove('active');
-            });
-            
-            // روشن کردن ستاره فعلی
+            stars.forEach(star => star.classList.remove('active'));
             stars[currentStar].classList.add('active');
-            
-            // رفتن به ستاره بعدی
             currentStar = (currentStar + 1) % stars.length;
         }
         
-        // اجرا هر ۳ ثانیه
         setInterval(lightNextStar, 3000);
-        
-        // روشن کردن اولین ستاره بلافاصله
-        setTimeout(() => {
-            lightNextStar();
-        }, 100);
+        setTimeout(lightNextStar, 100);
 
-        // ===== CLOSE MENU ON OUTSIDE CLICK =====
+        // ===== اسکرول نرم =====
+        document.querySelectorAll('.navbar a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ===== بستن منو با کلیک بیرون =====
         document.addEventListener('click', (e) => {
             if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
                 menuToggle.classList.remove('active');
